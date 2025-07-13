@@ -6,3 +6,7 @@ type GitHubEvent struct {
 	PullRequest   string `gorm:"foreignKey:IdPullRequest;references:ID"`
 	status        string
 }
+
+func init() {
+	RegisterModel(&GitHubEvent{})
+}
