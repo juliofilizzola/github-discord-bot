@@ -27,3 +27,7 @@ type PullRequest struct {
 	AuthorID uint `json:"author_id"`
 	Author   User `gorm:"foreignKey:AuthorID" json:"author"`
 }
+
+func init() {
+	RegisterModel(&PullRequest{})
+}
