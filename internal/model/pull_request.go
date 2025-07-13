@@ -3,7 +3,7 @@ package model
 import "time"
 
 type PullRequest struct {
-	ID           uint       `gorm:"primaryKey" json:"id"`
+	ID           string     `gorm:"primaryKey" json:"id"`
 	GitHubID     int64      `gorm:"uniqueIndex" json:"github_id"`
 	Number       int        `json:"number"`
 	Title        string     `json:"title"`
