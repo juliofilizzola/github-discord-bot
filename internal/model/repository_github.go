@@ -3,7 +3,7 @@ package model
 import "time"
 
 type Repository struct {
-	ID            uint   `gorm:"primaryKey" json:"id"`
+	ID            string `gorm:"primaryKey" json:"id"`
 	GitHubID      int64  `gorm:"uniqueIndex" json:"github_id"`
 	Name          string `json:"name"`
 	FullName      string `json:"full_name"`
