@@ -1,9 +1,13 @@
 package main
 
 import (
-	"log"
+	"github-discord-bot/internal/config"
+	"github-discord-bot/internal/db"
 )
 
 func main() {
-	log.Fatal("Not implemented")
+	cfg := config.Load()
+
+	db.Connect(cfg.DatabaseURL)
+	//db.DB.AutoMigrate()
 }
