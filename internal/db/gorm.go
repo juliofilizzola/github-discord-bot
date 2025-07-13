@@ -48,3 +48,10 @@ func InitializeDatabase() error {
 
 	return nil
 }
+
+func GetDB() *gorm.DB {
+	if DB == nil {
+		log.Fatal("Database connection is not initialized")
+	}
+	return DB
+}
