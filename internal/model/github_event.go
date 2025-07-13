@@ -1,5 +1,8 @@
 package model
 
 type GitHubEvent struct {
-	ID uint `gorm:"primaryKey"`
+	ID            string `gorm:"primaryKey"`
+	IdPullRequest string `json:"IdPullRequest"`
+	PullRequest   string `gorm:"foreignKey:IdPullRequest;references:ID"`
+	status        string
 }
