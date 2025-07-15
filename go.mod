@@ -1,4 +1,4 @@
-module github-discord-bot
+module github.com/juliofilizzola/github-discord-bot
 
 go 1.24
 
