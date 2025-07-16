@@ -1,8 +1,8 @@
 package router
 
 import (
-	"github-discord-bot/internal/config"
 	"github.com/gin-gonic/gin"
+	"github.com/juliofilizzola/github-discord-bot/internal/config"
 )
 
 var routerRegistrations []func(*gin.Engine)
