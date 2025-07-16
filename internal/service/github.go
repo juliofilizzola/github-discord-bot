@@ -1,6 +1,6 @@
 package service
 
-import "github-discord-bot/internal/repository"
+import "github.com/juliofilizzola/github-discord-bot/internal/repository"
 
 type GitHubService struct {
 	repository *repository.GitHubRepository
