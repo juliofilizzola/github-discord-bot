@@ -1,8 +1,8 @@
 package controller
 
 import (
-	"github-discord-bot/internal/service"
 	"github.com/gin-gonic/gin"
+	"github.com/juliofilizzola/github-discord-bot/internal/service"
 )
 
 type GitHubController struct {
