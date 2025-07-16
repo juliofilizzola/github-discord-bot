@@ -2,8 +2,9 @@ package db
 
 import (
 	"fmt"
-	"github-discord-bot/internal/config"
-	"github-discord-bot/internal/model"
+	"github.com/juliofilizzola/github-discord-bot/internal/config"
+	"github.com/juliofilizzola/github-discord-bot/internal/model"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"log"
