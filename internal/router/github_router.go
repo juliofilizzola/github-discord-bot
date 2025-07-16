@@ -1,9 +1,9 @@
 package router
 
 import (
-	"github-discord-bot/internal/controller"
-	"github-discord-bot/internal/service"
 	"github.com/gin-gonic/gin"
+	"github.com/juliofilizzola/github-discord-bot/internal/controller"
+	"github.com/juliofilizzola/github-discord-bot/internal/service"
 )
 
 func init() {
