@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"github-discord-bot/internal/db"
-	"github-discord-bot/internal/model"
+	"github.com/juliofilizzola/github-discord-bot/internal/db"
+	"github.com/juliofilizzola/github-discord-bot/internal/model"
 )
 
 type GitHubRepository struct{}
