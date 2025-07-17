@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github-discord-bot/internal/db"
-	"github-discord-bot/internal/router"
+	"github.com/juliofilizzola/github-discord-bot/internal/db"
+	"github.com/juliofilizzola/github-discord-bot/internal/router"
 )
 
 func main() {
