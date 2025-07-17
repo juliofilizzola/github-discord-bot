@@ -9,9 +9,10 @@ import (
 )
 
 type Config struct {
-	DatabaseURL       string
-	DiscordWebhookURL string
-	Port              string
+	DatabaseURL           string
+	DatabaseUrlMigrations string
+	DiscordWebhookURL     string
+	Port                  string
 }
 
 var (
@@ -26,9 +27,10 @@ func Load() *Config {
 		}
 
 		cfg = &Config{
-			DatabaseURL:       os.Getenv("DATABASE_URL"),
-			DiscordWebhookURL: os.Getenv("DISCORD_WEBHOOK_URL"),
-			Port:              os.Getenv("PORT"),
+			DatabaseURL:           os.Getenv("DATABASE_URL"),
+			DiscordWebhookURL:     os.Getenv("DISCORD_WEBHOOK_URL"),
+			Port:                  os.Getenv("PORT"),
+			DatabaseUrlMigrations: os.Getenv("DATABASE_URL_MIGRATIONS"),
 		}
 
 		if cfg.DatabaseURL == "" || cfg.DiscordWebhookURL == "" || cfg.Port == "" {
