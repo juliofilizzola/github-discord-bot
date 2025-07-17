@@ -18,3 +18,10 @@ func (r *GitHubRepository) GetRepositoryDetails(owner, repo string) (string, err
 	}
 	return existing.ID, nil
 }
+
+func (r *GitHubRepository) SaveRepositoryDetails(event *model.GitHubEvent) error {
+	if err := db.DB.Create(event).Error; err != nil {
+		return err
+	}
+	return nil
+}
