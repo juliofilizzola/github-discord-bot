@@ -23,6 +23,8 @@ func connection(dsn string) error {
 }
 
 func startMigrations() error {
+	println("Starting database migrations...")
+	println("Database: " + DB.Dialector.Name())
 	err := DB.AutoMigrate(model.GetRegisteredModels()...)
 	if err != nil {
 		return fmt.Errorf("erro ao migrar banco de dados: %v", err)
