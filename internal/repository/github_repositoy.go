@@ -1,8 +1,10 @@
 package repository
 
 import (
+	"github.com/google/uuid"
 	"github.com/juliofilizzola/github-discord-bot/internal/db"
 	"github.com/juliofilizzola/github-discord-bot/internal/model"
+	"gorm.io/gorm"
 )
 
 type GitHubRepository struct{}
@@ -20,7 +22,12 @@ func (r *GitHubRepository) GetRepositoryDetails(owner, repo string) (string, err
 }
 
 func (r *GitHubRepository) SaveRepositoryDetails(event *model.GitHubPullRequestEvent) error {
-	if err := db.DB.Create(event).Error; err != nil {
+	if event.PullRequest.IdPullRequest == "" {
+		event.PullRequest.IdPullRequest = uuid.New().String()
+		event.PullRequestID = event.PullRequest.IdPullRequest
+	}
+
+	if err := db.DB.Session(&gorm.Session{FullSaveAssociations: true}).Create(&event).Error; err != nil {
 		return err
 	}
 	return nil
