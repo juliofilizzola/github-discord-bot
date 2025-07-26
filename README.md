@@ -48,11 +48,3 @@ API desenvolvida em Go para integração entre GitHub e Discord, permitindo noti
 ## 📄 Licença
 
 Este projeto está sob a licença MIT - veja o arquivo [LICENSE.md](LICENSE.md) para mais detalhes.
-
-## ✒️ Autores
-
-* **Julio Filizzola** - *Desenvolvimento inicial* - [juliofilizzola](https://github.com/juliofilizzola)
-
-## 📞 Suporte
-
-Para suporte, abra uma issue no repositório ou entre em contato através do [GitHub](https://github.com/juliofilizzola).
