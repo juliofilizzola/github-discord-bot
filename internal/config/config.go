@@ -1,6 +1,7 @@
 package config
 
 import (
+	"github.com/juliofilizzola/github-discord-bot/internal/router"
 	"log"
 	"os"
 	"sync"
@@ -39,4 +40,9 @@ func Load() *Config {
 	})
 
 	return cfg
+}
+
+func InitializeSystem() {
+	Load()
+	router.Init()
 }
