@@ -3,7 +3,6 @@ package service
 import (
 	"fmt"
 	"github.com/juliofilizzola/github-discord-bot/internal/model"
-	"github.com/juliofilizzola/github-discord-bot/internal/queue"
 	"github.com/juliofilizzola/github-discord-bot/internal/repository"
 )
 
@@ -30,6 +29,5 @@ func (service *GitHubService) SaveRepositoryDetails(event *model.GitHubPullReque
 	if err := service.repository.SaveRepositoryDetails(event); err != nil {
 		return err
 	}
-	queue.EventGithub <- event
 	return nil
 }
