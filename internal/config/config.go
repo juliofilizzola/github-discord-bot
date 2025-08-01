@@ -1,6 +1,7 @@
 package config
 
 import (
+	"github.com/juliofilizzola/github-discord-bot/internal/db"
 	"github.com/juliofilizzola/github-discord-bot/internal/router"
 	"log"
 	"os"
@@ -44,5 +45,6 @@ func Load() *Config {
 
 func InitializeSystem() {
 	Load()
+	db.InitializeDatabase()
 	router.Init()
 }
