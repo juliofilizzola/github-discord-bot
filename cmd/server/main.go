@@ -1,13 +1,7 @@
 package main
 
-import (
-	"github.com/juliofilizzola/github-discord-bot/internal/db"
-	"github.com/juliofilizzola/github-discord-bot/internal/router"
-)
+import "github.com/juliofilizzola/github-discord-bot/internal/config"
 
 func main() {
-	if err := db.InitializeDatabase(); err != nil {
-		panic(err)
-	}
-	router.Init()
+	config.InitializeSystem()
 }
