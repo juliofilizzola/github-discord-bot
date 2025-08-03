@@ -7,9 +7,9 @@ import (
 )
 
 func main() {
+	go queue.ConsumeEventGithub()
 	if err := db.InitializeDatabase(); err != nil {
 		panic(err)
 	}
 	router.Init()
-	go queue.ConsumeEventGithub()
 }
