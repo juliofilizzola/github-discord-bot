@@ -24,7 +24,7 @@ func (service *GitHubService) GetRepositoryDetails(owner, repo string) (string, 
 	return existing, nil
 }
 
-func (service *GitHubService) SaveRepositoryDetails(event *model.GitHubPullRequestEvent) error {
+func (service *GitHubService) SaveRepositoryDetails(event *model.GitHubEvent) error {
 	queue.EventGithub <- event
 	println("Save github pull request event")
 	if err := service.repository.SaveRepositoryDetails(event); err != nil {
