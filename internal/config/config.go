@@ -12,6 +12,7 @@ type Config struct {
 	DatabaseURL           string
 	DatabaseUrlMigrations string
 	DiscordWebhookURL     string
+	DiscordToken          string
 	Port                  string
 }
 
@@ -31,9 +32,10 @@ func Load() *Config {
 			DiscordWebhookURL:     os.Getenv("DISCORD_WEBHOOK_URL"),
 			Port:                  os.Getenv("PORT"),
 			DatabaseUrlMigrations: os.Getenv("DATABASE_URL_MIGRATIONS"),
+			DiscordToken:          os.Getenv("DISCORD_TOKEN"),
 		}
 
-		if cfg.DatabaseURL == "" || cfg.DiscordWebhookURL == "" || cfg.Port == "" {
+		if cfg.DatabaseURL == "" || cfg.DiscordWebhookURL == "" || cfg.Port == "" || cfg.DiscordToken == "" {
 			log.Fatal("Missing required environment variables")
 		}
 	})
