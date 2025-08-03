@@ -1,14 +1,34 @@
 package service
 
 import (
-	"bytes"
-	"net/http"
-	"os"
+	"github.com/juliofilizzola/github-discord-bot/internal/config"
+
+	"github.com/bwmarrin/discordgo"
+	"github.com/juliofilizzola/github-discord-bot/internal/model"
 )
 
-func SendToDiscord(message string) (err error) {
-	webhookURL := os.Getenv("DISCORD_WEBHOOK_URL")
-	payload := []byte(`{"content": "` + message + `"}`)
-	_, err = http.Post(webhookURL, "application/json", bytes.NewBuffer(payload))
-	return err
+var (
+	DiscordServer *discordgo.Session
+)
+
+func InitializationDiscord() (err error) {
+	cfg := config.Load()
+	discord, err := discordgo.New("Bot " + cfg.DiscordToken)
+	if err != nil {
+		return err
+	}
+	DiscordServer = discord
+	return nil
+}
+
+func SendEmbedToDiscord(webhookId string, event *model.GitHubEvent) error {
+	embed := FormatEmbedDiscord(event)
+	cfg := config.Load()
+	token := cfg.DiscordToken
+	_, err := DiscordServer.WebhookExecute(webhookId, token, false, &embed)
+	if err != nil {
+		println("Error sending embed to Discord:", err.Error())
+		return err
+	}
+	return nil
 }
