@@ -33,7 +33,7 @@ func (c *GitHubController) GetRepositoryDetails(ctx *gin.Context) {
 }
 
 func (c *GitHubController) SaveRepositoryDetails(ctx *gin.Context) {
-	var body model.GitHubPullRequestEvent
+	var body model.GitHubEvent
 	if err := ctx.Bind(&body); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
 		return
@@ -53,7 +53,7 @@ func (c *GitHubController) SaveRepositoryDetails(ctx *gin.Context) {
 
 	if body.PullRequest.User.IdGit == "" && body.PullRequest.User.ID != 0 {
 		body.PullRequest.User.IdGit = uuid.New().String()
-		body.PullRequest.UserID = body.PullRequest.User.IdGit
+		body.PullRequest.ID = body.PullRequest.User.ID
 	}
 
 	if err := c.service.SaveRepositoryDetails(&body); err != nil {
