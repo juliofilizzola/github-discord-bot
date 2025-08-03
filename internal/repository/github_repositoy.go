@@ -1,7 +1,6 @@
 package repository
 
 import (
-	"github.com/google/uuid"
 	"github.com/juliofilizzola/github-discord-bot/internal/db"
 	"github.com/juliofilizzola/github-discord-bot/internal/model"
 	"gorm.io/gorm"
@@ -14,20 +13,17 @@ func NewGitHubRepository() *GitHubRepository {
 }
 
 func (r *GitHubRepository) GetRepositoryDetails(owner, repo string) (string, error) {
-	var existing model.GitHubPullRequestEvent
+	var existing model.GitHubEvent
 	if err := db.DB.Where("owner = ? AND repo = ?", owner, repo).First(&existing).Error; err != nil {
-		return "", err // Outro erro
+		return "", err
 	}
 	return existing.ID, nil
 }
 
-func (r *GitHubRepository) SaveRepositoryDetails(event *model.GitHubPullRequestEvent) error {
-	if event.PullRequest.IdPullRequest == "" {
-		event.PullRequest.IdPullRequest = uuid.New().String()
-		event.PullRequestID = event.PullRequest.IdPullRequest
-	}
-
+func (r *GitHubRepository) SaveRepositoryDetails(event *model.GitHubEvent) error {
+	println("SaveRepositoryDetails")
 	if err := db.DB.Session(&gorm.Session{FullSaveAssociations: true}).Create(&event).Error; err != nil {
+		println(err.Error())
 		return err
 	}
 	return nil
