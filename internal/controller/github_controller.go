@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"github.com/juliofilizzola/github-discord-bot/internal/model"
@@ -40,14 +39,11 @@ func (c *GitHubController) SaveRepositoryDetails(ctx *gin.Context) {
 		return
 	}
 
-	fmt.Printf("Pull Request: %+v\n", body.PullRequest)
-
 	if body.PullRequest.ID == 0 {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Pull Request ID is required"})
 		return
 	}
 
-	// Garantir que as datas estejam preenchidas
 	if body.PullRequest.CreatedAt.IsZero() {
 		body.PullRequest.CreatedAt = time.Now()
 	}
@@ -55,13 +51,10 @@ func (c *GitHubController) SaveRepositoryDetails(ctx *gin.Context) {
 		body.PullRequest.UpdatedAt = time.Now()
 	}
 
-	// Garantir que o User.IdGit seja preenchido a partir do User.ID
 	if body.PullRequest.User.IdGit == "" && body.PullRequest.User.ID != 0 {
 		body.PullRequest.User.IdGit = uuid.New().String()
 		body.PullRequest.UserID = body.PullRequest.User.IdGit
 	}
-
-	fmt.Printf("Pull Request após processamento: %+v\n", body.PullRequest)
 
 	if err := c.service.SaveRepositoryDetails(&body); err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to save repository details"})
