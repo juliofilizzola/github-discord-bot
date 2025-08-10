@@ -14,7 +14,7 @@ func NewGitHubRepository() *GitHubRepository {
 
 func (r *GitHubRepository) GetRepositoryDetails(owner, repo string) (string, error) {
 	var existing model.GitHubEvent
-	if err := db.DB.Where("owner = ? AND repo = ?", owner, repo).First(&existing).Error; err != nil {
+	if err := db.GetDB().Where("owner = ? AND repo = ?", owner, repo).First(&existing).Error; err != nil {
 		return "", err
 	}
 	return existing.ID, nil
@@ -22,7 +22,7 @@ func (r *GitHubRepository) GetRepositoryDetails(owner, repo string) (string, err
 
 func (r *GitHubRepository) SaveRepositoryDetails(event *model.GitHubEvent) error {
 	println("SaveRepositoryDetails")
-	if err := db.DB.Session(&gorm.Session{FullSaveAssociations: true}).Create(&event).Error; err != nil {
+	if err := db.GetDB().Session(&gorm.Session{FullSaveAssociations: true}).Create(&event).Error; err != nil {
 		println(err.Error())
 		return err
 	}
