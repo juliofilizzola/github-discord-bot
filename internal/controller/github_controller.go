@@ -1,12 +1,13 @@
 package controller
 
 import (
+	"net/http"
+	"time"
+
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"github.com/juliofilizzola/github-discord-bot/internal/model"
 	"github.com/juliofilizzola/github-discord-bot/internal/service"
-	"net/http"
-	"time"
 )
 
 type GitHubController struct {
