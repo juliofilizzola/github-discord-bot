@@ -1,7 +1,6 @@
 package service
 
 import (
-	"fmt"
 	"github.com/juliofilizzola/github-discord-bot/internal/model"
 	"github.com/juliofilizzola/github-discord-bot/internal/queue"
 	"github.com/juliofilizzola/github-discord-bot/internal/repository"
@@ -25,11 +24,11 @@ func (service *GitHubService) GetRepositoryDetails(owner, repo string) (string, 
 	return existing, nil
 }
 
-func (service *GitHubService) SaveRepositoryDetails(event *model.GitHubPullRequestEvent) error {
-	fmt.Printf("%+v\n", event)
+func (service *GitHubService) SaveRepositoryDetails(event *model.GitHubEvent) error {
+	queue.EventGithub <- event
+	println("Save github pull request event")
 	if err := service.repository.SaveRepositoryDetails(event); err != nil {
 		return err
 	}
-	queue.EventGithub <- event
 	return nil
 }

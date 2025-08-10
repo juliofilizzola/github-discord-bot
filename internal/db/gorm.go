@@ -2,12 +2,14 @@ package db
 
 import (
 	"fmt"
+
 	"github.com/juliofilizzola/github-discord-bot/internal/config"
 	"github.com/juliofilizzola/github-discord-bot/internal/model"
 
+	"log"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"log"
 )
 
 var DB *gorm.DB
