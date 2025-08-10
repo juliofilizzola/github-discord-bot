@@ -1,9 +1,10 @@
 package service
 
 import (
-	"github.com/juliofilizzola/github-discord-bot/internal/model"
 	"strconv"
 	"time"
+
+	"github.com/juliofilizzola/github-discord-bot/internal/model"
 
 	"github.com/bwmarrin/discordgo"
 )
