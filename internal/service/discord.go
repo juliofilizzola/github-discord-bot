@@ -11,16 +11,6 @@ var (
 	DiscordServer *discordgo.Session
 )
 
-func InitializationDiscord() (err error) {
-	cfg := config.Load()
-	discord, err := discordgo.New("Bot " + cfg.DiscordToken)
-	if err != nil {
-		return err
-	}
-	DiscordServer = discord
-	return nil
-}
-
 func SendEmbedToDiscord(webhookId string, event *model.GitHubEvent) error {
 	embed := FormatEmbedDiscord(event)
 	cfg := config.Load()
