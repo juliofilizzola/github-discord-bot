@@ -21,9 +21,7 @@ func (r *GitHubRepository) GetRepositoryDetails(owner, repo string) (string, err
 }
 
 func (r *GitHubRepository) SaveRepositoryDetails(event *model.GitHubEvent) error {
-	println("SaveRepositoryDetails")
 	if err := db.GetDB().Session(&gorm.Session{FullSaveAssociations: true}).Create(&event).Error; err != nil {
-		println(err.Error())
 		return err
 	}
 	return nil
