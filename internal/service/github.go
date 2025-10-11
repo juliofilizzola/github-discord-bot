@@ -19,7 +19,7 @@ func NewGithubService() *GitHubService {
 func (service *GitHubService) GetRepositoryDetails(owner, repo string) (string, error) {
 	existing, err := service.repository.GetRepositoryDetails(owner, repo)
 	if err != nil {
-		return "", err // Outro erro
+		return "", err
 	}
 	return existing, nil
 }

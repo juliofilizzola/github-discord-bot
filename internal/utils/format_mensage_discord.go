@@ -1,13 +1,31 @@
-package service
+package utils
 
 import (
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/juliofilizzola/github-discord-bot/internal/model"
 
 	"github.com/bwmarrin/discordgo"
 )
+
+func alertDiscordColor(title string) int {
+	titleLower := strings.ToLower(title)
+
+	switch {
+	case strings.HasPrefix(titleLower, "feat"):
+		return 0x00ff00 // verde
+	case strings.HasPrefix(titleLower, "fix"):
+		return 0xffa500 // laranja
+	case strings.HasPrefix(titleLower, "hotfix"):
+		return 0xff0000 // vermelho
+	case strings.HasPrefix(titleLower, "docs"):
+		return 0x3498db // azul
+	default:
+		return 0xffffff // branco (default)
+	}
+}
 
 func FormatEmbedDiscord(githubDomain *model.GitHubEvent) discordgo.WebhookParams {
 	var reviews []string
@@ -18,7 +36,7 @@ func FormatEmbedDiscord(githubDomain *model.GitHubEvent) discordgo.WebhookParams
 		Title:       githubDomain.PullRequest.Title,
 		Description: "",
 		Timestamp:   time.Now().Format(githubDomain.PullRequest.CreatedAt.Format(time.RFC3339)),
-		Color:       0,
+		Color:       alertDiscordColor(githubDomain.PullRequest.Title),
 		Footer: &discordgo.MessageEmbedFooter{
 			Text:         "Pull Request #" + strconv.Itoa(githubDomain.PullRequest.Number) + " - " + githubDomain.Repository.Name,
 			IconURL:      githubDomain.PullRequest.User.AvatarURL,

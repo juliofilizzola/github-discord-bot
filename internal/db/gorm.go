@@ -21,6 +21,7 @@ func connection(dsn string) error {
 	if err != nil {
 		return fmt.Errorf("failed to connect to database: %w", err)
 	}
+
 	return nil
 }
 
