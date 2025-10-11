@@ -1,0 +1,43 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {
+          "name": "Julio Filizzola",
+          "email": "juliofilizzola@hotmail.com",
+          "url": "https://github.com/juliofilizzola"
+        },
+      "description": "Discord bot for github",
+      "title": "Github Discord Bot",
+      "version": "1.0"
+    },
+    "paths": {
+        "/webhook": {
+            "post": {
+            "summary": "Receive GitHub webhooks",
+            "description": "Endpoint to receive GitHub webhooks and forward them to Discord.",
+            "parameters": [
+                {
+                  "in": "body",
+                  "name": "payload",
+                  "description": "GitHub webhook payload",
+                  "required": true,
+                  "schema": {
+                      "type": "object"
+                  }
+                }
+            ],
+            "responses": {
+                "200": {
+                "description": "Webhook received successfully"
+                },
+                "400": {
+                "description": "Invalid payload"
+                },
+                "500": {
+                "description": "Internal server error"
+                }
+            }
+            }
+        }
+    }
+}

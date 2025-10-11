@@ -1,8 +1,25 @@
 info:
-  title: "Github Notification Pull Request Discord"
+  contact: {
+    email: "juliofilizzola@hotmail.com",
+    name: "Julio Filizzola",
+    url: "https://github.com/filizzola"
+  }
+  description: "API documentation for the server application.",
+  title: "Server API",
   version: "1.0.0"
-  description: "API Notification Pull Request Discord"
 paths: {
+    "/health": {
+        get: {
+          description: "Check the health status of the server.",
+          responses: {
+              "200": {
+              description: "Server is healthy."
+              }
+          }
+        }
+    },
+    "/webhook": {
 
+    }
 }
 swagger: "2.0"
