@@ -1,0 +1,8 @@
+info:
+  title: "Github Notification Pull Request Discord"
+  version: "1.0.0"
+  description: "API Notification Pull Request Discord"
+paths: {
+
+}
+swagger: "2.0"
