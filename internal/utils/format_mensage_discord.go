@@ -81,19 +81,19 @@ func FormatEmbedDiscord(githubDomain *model.GitHubEvent) discordgo.WebhookParams
 				Name: "Assinado:",
 				Value: func() string {
 					if len(githubDomain.PullRequest.Assignee.Login) == 0 {
-						return "Não teve assinatura"
+						return "Não teve assinatura."
 					}
 					return githubDomain.PullRequest.Assignee.Login
 				}(),
 				Inline: false,
 			},
 			{
-				Name:   "Codigo adicionado:",
+				Name:   "Código adicionado:",
 				Value:  strconv.Itoa(githubDomain.PullRequest.Additions),
 				Inline: true,
 			},
 			{
-				Name:   "Codigo deletado",
+				Name:   "Código deletado",
 				Value:  strconv.Itoa(githubDomain.PullRequest.Deletions),
 				Inline: true,
 			},
