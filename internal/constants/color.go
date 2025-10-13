@@ -1,10 +1,11 @@
 package constants
 
-type ColorNotification string
+type ColorNotification int
 
 const (
-	ColorPending ColorNotification = "#000000"
-	ColorSent    ColorNotification = "#00FF00"
-	ColorFailed  ColorNotification = "#FF0000"
-	ColorSuccess ColorNotification = "#0000FF"
+	ColorSuccess ColorNotification = 0x00ff00
+	ColorInfo    ColorNotification = 0x0000ff
+	ColorWarning ColorNotification = 0xffff00
+	ColorError   ColorNotification = 0xff0000
+	ColorDefault ColorNotification = 0xffffff
 )
