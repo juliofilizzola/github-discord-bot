@@ -176,7 +176,7 @@ func (pr *PullRequest) BeforeCreate(tx *gorm.DB) error {
 	if pr.IdPullRequest == "" {
 		pr.IdPullRequest = uuid.New().String()
 	}
-	// Não gere UUID para campos de relacionamento, deixe como nil se vazio
+
 	return nil
 }
 

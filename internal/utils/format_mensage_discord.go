@@ -5,6 +5,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/juliofilizzola/github-discord-bot/internal/constants"
 	"github.com/juliofilizzola/github-discord-bot/internal/model"
 
 	"github.com/bwmarrin/discordgo"
@@ -15,15 +16,15 @@ func alertDiscordColor(title string) int {
 
 	switch {
 	case strings.HasPrefix(titleLower, "feat"):
-		return 0x00ff00 // verde
+		return int(constants.ColorSuccess)
 	case strings.HasPrefix(titleLower, "fix"):
-		return 0xffa500 // laranja
+		return int(constants.ColorWarning)
 	case strings.HasPrefix(titleLower, "hotfix"):
-		return 0xff0000 // vermelho
+		return int(constants.ColorError)
 	case strings.HasPrefix(titleLower, "docs"):
-		return 0x3498db // azul
+		return int(constants.ColorInfo)
 	default:
-		return 0xffffff // branco (default)
+		return int(constants.ColorDefault)
 	}
 }
 
@@ -35,7 +36,7 @@ func FormatEmbedDiscord(githubDomain *model.GitHubEvent) discordgo.WebhookParams
 		Type:        discordgo.EmbedTypeLink,
 		Title:       githubDomain.PullRequest.Title,
 		Description: "",
-		Timestamp:   time.Now().Format(githubDomain.PullRequest.CreatedAt.Format(time.RFC3339)),
+		Timestamp:   time.Now().Format(time.RFC3339),
 		Color:       alertDiscordColor(githubDomain.PullRequest.Title),
 		Footer: &discordgo.MessageEmbedFooter{
 			Text:         "Pull Request #" + strconv.Itoa(githubDomain.PullRequest.Number) + " - " + githubDomain.Repository.Name,
@@ -80,19 +81,19 @@ func FormatEmbedDiscord(githubDomain *model.GitHubEvent) discordgo.WebhookParams
 				Name: "Assinado:",
 				Value: func() string {
 					if len(githubDomain.PullRequest.Assignee.Login) == 0 {
-						return "Não teve assinatura"
+						return "Não teve assinatura."
 					}
 					return githubDomain.PullRequest.Assignee.Login
 				}(),
 				Inline: false,
 			},
 			{
-				Name:   "Codigo adicionado:",
+				Name:   "Código adicionado:",
 				Value:  strconv.Itoa(githubDomain.PullRequest.Additions),
 				Inline: true,
 			},
 			{
-				Name:   "Codigo deletado",
+				Name:   "Código deletado",
 				Value:  strconv.Itoa(githubDomain.PullRequest.Deletions),
 				Inline: true,
 			},
@@ -110,9 +111,9 @@ func FormatEmbedDiscord(githubDomain *model.GitHubEvent) discordgo.WebhookParams
 	}
 
 	return discordgo.WebhookParams{
-		Content:    "Nova PR no Repositorio: " + githubDomain.Repository.Name,
+		Content:    "Nova PR no Repository: " + githubDomain.Repository.Name,
 		Username:   `julio filizzola`,
-		AvatarURL:  `julio filizzola`,
+		AvatarURL:  githubDomain.Sender.AvatarURL,
 		TTS:        false,
 		Files:      nil,
 		Components: nil,

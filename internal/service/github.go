@@ -16,6 +16,9 @@ func NewGithubService() *GitHubService {
 	}
 }
 
+func (service *GitHubService) GetOwner(owner string) (*model.GitHubUser, error) {
+}
+
 func (service *GitHubService) GetRepositoryDetails(owner, repo string) (string, error) {
 	existing, err := service.repository.GetRepositoryDetails(owner, repo)
 	if err != nil {
