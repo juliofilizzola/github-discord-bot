@@ -13,14 +13,14 @@ func NewGitHubRepository() *GitHubRepository {
 }
 
 func (r *GitHubRepository) GetRepositoryDetails(owner, repo string) (string, error) {
-	var existing model.GitHubEvent
-	if err := db.GetDB().Where("owner = ? AND repo = ?", owner, repo).First(&existing).Error; err != nil {
+	var repository model.Repository
+	if err := db.GetDB().Where("owner = ? AND repo = ?", owner, repo).First(&repository).Error; err != nil {
 		return "", err
 	}
-	return existing.ID, nil
+	return repository.Description, nil
 }
 
-func (r *GitHubRepository) SaveRepositoryDetails(event *model.GitHubEvent) error {
+func (r *GitHubRepository) SaveRepositoryDetails(event *model.WebhookEvent) error {
 	if err := db.GetDB().Session(&gorm.Session{FullSaveAssociations: true}).Create(&event).Error; err != nil {
 		println(err.Error())
 		return err
