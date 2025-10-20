@@ -28,6 +28,19 @@ func alertDiscordColor(title string) int {
 	}
 }
 
+func returnString(reviews []string) string {
+	var test string
+	if len(reviews) == 0 {
+		return "Sem reviews"
+	}
+
+	for _, value := range reviews {
+		test += value
+	}
+
+	return test
+}
+
 func FormatEmbedDiscord(githubDomain *model.GitHubEvent) discordgo.WebhookParams {
 	var reviews []string
 
@@ -130,17 +143,4 @@ func FormatEmbedDiscord(githubDomain *model.GitHubEvent) discordgo.WebhookParams
 		},
 		Flags: 0,
 	}
-}
-
-func returnString(reviews []string) string {
-	var test string
-	if len(reviews) == 0 {
-		return "Sem reviews"
-	}
-
-	for _, value := range reviews {
-		test += value
-	}
-
-	return test
 }
