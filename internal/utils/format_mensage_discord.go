@@ -55,6 +55,8 @@ func FormatEmbedDiscord(githubDomain *model.GitHubEvent) discordgo.WebhookParams
 			Width:    280,
 			Height:   20,
 		},
+		Video:    nil,
+		Provider: nil,
 		Author: &discordgo.MessageEmbedAuthor{
 			URL:          githubDomain.PullRequest.User.HTMLURL,
 			Name:         githubDomain.PullRequest.User.Login,
