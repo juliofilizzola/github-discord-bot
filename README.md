@@ -21,6 +21,7 @@ API desenvolvida em Go para integração entre GitHub e Discord, permitindo noti
 ## 🏃 Executando o Projeto
 
 1. Inicie o servidor:
+
 ```bash
  go run main.go
 ```
