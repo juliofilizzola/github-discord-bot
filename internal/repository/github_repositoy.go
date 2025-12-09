@@ -1,7 +1,6 @@
 package repository
 
 import (
-	"github.com/google/uuid"
 	"github.com/juliofilizzola/github-discord-bot/internal/db"
 	"github.com/juliofilizzola/github-discord-bot/internal/model"
 	"gorm.io/gorm"
@@ -13,21 +12,25 @@ func NewGitHubRepository() *GitHubRepository {
 	return &GitHubRepository{}
 }
 
-func (r *GitHubRepository) GetRepositoryDetails(owner, repo string) (string, error) {
-	var existing model.GitHubPullRequestEvent
-	if err := db.DB.Where("owner = ? AND repo = ?", owner, repo).First(&existing).Error; err != nil {
-		return "", err // Outro erro
+func (r *GitHubRepository) GetUserOwner(ownerId string) (*model.GitHubUser, error) {
+	var existing model.GitHubUser
+	if err := db.GetDB().Where("id = ?", ownerId).First(&existing).Error; err != nil {
+		return nil, err
 	}
-	return existing.ID, nil
+	return &existing, nil
 }
 
-func (r *GitHubRepository) SaveRepositoryDetails(event *model.GitHubPullRequestEvent) error {
-	if event.PullRequest.IdPullRequest == "" {
-		event.PullRequest.IdPullRequest = uuid.New().String()
-		event.PullRequestID = event.PullRequest.IdPullRequest
+func (r *GitHubRepository) GetRepositoryDetails(owner, repo string) (string, error) {
+	var repository model.Repository
+	if err := db.GetDB().Where("owner = ? AND repo = ?", owner, repo).First(&repository).Error; err != nil {
+		return "", err
 	}
+	return repository.Description, nil
+}
 
-	if err := db.DB.Session(&gorm.Session{FullSaveAssociations: true}).Create(&event).Error; err != nil {
+func (r *GitHubRepository) SaveRepositoryDetails(event *model.WebhookEvent) error {
+	if err := db.GetDB().Session(&gorm.Session{FullSaveAssociations: true}).Create(&event).Error; err != nil {
+		println(err.Error())
 		return err
 	}
 	return nil

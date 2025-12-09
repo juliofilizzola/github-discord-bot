@@ -10,7 +10,8 @@ func init() {
 	githubService := service.NewGithubService()
 	discordService := controller.NewGithubController(githubService)
 	RegisterRoutes(func(r *gin.Engine) {
-		r.GET("/github/webhook", discordService.GetRepositoryDetails)
-		r.POST("/github", discordService.SaveRepositoryDetails)
+		api := r.Group("/api/v1/github")
+		api.GET("/webhook", discordService.GetRepositoryDetails)
+		api.POST("/", discordService.SaveRepositoryDetails)
 	})
 }
