@@ -28,6 +28,19 @@ func alertDiscordColor(title string) int {
 	}
 }
 
+func returnString(reviews []string) string {
+	var test string
+	if len(reviews) == 0 {
+		return "Sem reviews"
+	}
+
+	for _, value := range reviews {
+		test += value
+	}
+
+	return test
+}
+
 func FormatEmbedDiscord(githubDomain *model.GitHubEvent) discordgo.WebhookParams {
 	var reviews []string
 
@@ -55,6 +68,8 @@ func FormatEmbedDiscord(githubDomain *model.GitHubEvent) discordgo.WebhookParams
 			Width:    280,
 			Height:   20,
 		},
+		Video:    nil,
+		Provider: nil,
 		Author: &discordgo.MessageEmbedAuthor{
 			URL:          githubDomain.PullRequest.User.HTMLURL,
 			Name:         githubDomain.PullRequest.User.Login,
@@ -128,17 +143,4 @@ func FormatEmbedDiscord(githubDomain *model.GitHubEvent) discordgo.WebhookParams
 		},
 		Flags: 0,
 	}
-}
-
-func returnString(reviews []string) string {
-	var test string
-	if len(reviews) == 0 {
-		return "Sem reviews"
-	}
-
-	for _, value := range reviews {
-		test += value
-	}
-
-	return test
 }
